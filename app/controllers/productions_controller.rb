@@ -3,7 +3,7 @@ require 'set'
 
 class ProductionsController < ApplicationController
 	def index
-		@daily_productions = DailyProduction.all
+		@daily_productions = DailyProduction.includes("inverters").all
 	end
 
 	def new
@@ -18,7 +18,7 @@ class ProductionsController < ApplicationController
 
 		CSV.foreach(params[:file].path, headers:true) do |row|
 			inverter_id = row["identifier"].to_i
-			inverters_id.add({inverter_id: inverter_id})
+			inverters_id.add(inverter_id)
 			datetime = DateTime.strptime(row["datetime"], "%d/%m/%y %H:%M")
 			hourly_productions << {
 				inverter_id: inverter_id,
@@ -41,6 +41,6 @@ class ProductionsController < ApplicationController
 	end
 
 	def show
-		@daily_production = DailyProduction.find(params[:id])
+		@daily_production = DailyProduction.includes("inverters", "hourly_productions").find(params[:id])
 	end
 end

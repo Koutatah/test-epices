@@ -10,6 +10,7 @@
 				<th scope="col">#</th>
 				<th scope="col">Date</th>
 				<th scope="col">Energy</th>
+				<th scope="col">Inverter</th>
 				<th scope="col"></th>
 				</tr>
 			</thead>
@@ -19,6 +20,7 @@
 					<th scope="row"><%= daily_production.id %></th>
 					<td><%= daily_production.date %></td>
 					<td><%= daily_production.energy_production %></td>
+					<td><%= daily_production.inverters.map(&:id).join(", ") %></td>
 					<td><%= link_to 'See more', production_path(daily_production.id), class: 'btn btn-secondary' %></td>
 					</tr>
 				<% end %>

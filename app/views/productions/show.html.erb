@@ -9,6 +9,9 @@
 	<div class="col-4">
 		Total energy: <%= @daily_production.energy_production %>
 	</div>
+	<div class="col-4">
+		<%= @daily_production.inverters.map(&:id).join(", ") %>
+	</div>
 	<div class="col-12">
 		<table class="table">
 			<thead>
