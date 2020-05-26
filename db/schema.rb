@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_075004) do
+ActiveRecord::Schema.define(version: 2020_05_26_083750) do
 
   create_table "daily_productions", force: :cascade do |t|
     t.date "date"
@@ -25,17 +25,17 @@ ActiveRecord::Schema.define(version: 2020_05_26_075004) do
   end
 
   create_table "hourly_productions", force: :cascade do |t|
-    t.datetime "date"
+    t.datetime "datetime"
     t.integer "energy_production"
     t.integer "daily_production_id", null: false
+    t.integer "inverter_id", null: false
     t.index ["daily_production_id"], name: "index_hourly_productions_on_daily_production_id"
+    t.index ["inverter_id"], name: "index_hourly_productions_on_inverter_id"
   end
 
   create_table "inverters", force: :cascade do |t|
-    t.integer "hourly_production_id", null: false
-    t.index ["hourly_production_id"], name: "index_inverters_on_hourly_production_id"
   end
 
   add_foreign_key "hourly_productions", "daily_productions"
-  add_foreign_key "inverters", "hourly_productions"
+  add_foreign_key "hourly_productions", "inverters"
 end
