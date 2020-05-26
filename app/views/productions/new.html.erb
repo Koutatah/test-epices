@@ -1,0 +1,8 @@
+<h1>Upload CSV</h1>
+
+<%= form_with(url: productions_path, multipart: true) do %>
+	<div class="form-group">
+  		<%= file_field_tag :file %>
+	</div>
+  <%= submit_tag("Import", class: "btn btn-primary") %>
+<% end %>
