@@ -10,18 +10,16 @@
 				<th scope="col">#</th>
 				<th scope="col">Date</th>
 				<th scope="col">Energy</th>
-				<th scope="col">Inverter</th>
 				<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<% @daily_productions.each do |daily_production| %>
 					<tr>
-					<th scope="row"><% daily_production.id %></th>
+					<th scope="row"><%= daily_production.id %></th>
 					<td><%= daily_production.date %></td>
 					<td><%= daily_production.energy_production %></td>
-					<td></td>
-					<td></td>
+					<td><%= link_to 'See more', production_path(daily_production.id), class: 'btn btn-secondary' %></td>
 					</tr>
 				<% end %>
 			</tbody>

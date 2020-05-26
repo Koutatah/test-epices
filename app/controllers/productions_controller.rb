@@ -3,7 +3,7 @@ require 'set'
 
 class ProductionsController < ApplicationController
 	def index
-		@daily_productions = DailyProduction.includes(:inverters).all
+		@daily_productions = DailyProduction.all
 	end
 
 	def new
@@ -35,12 +35,12 @@ class ProductionsController < ApplicationController
 			@daily_production.hourly_productions.build(hourly_productions)
 			@daily_production.save
 			@daily_production.inverters << inverters
-
 		end
 
-		redirect_to productions_path
+		redirect_to production_path(@daily_production.id)
 	end
 
 	def show
+		@daily_production = DailyProduction.find(params[:id])
 	end
 end

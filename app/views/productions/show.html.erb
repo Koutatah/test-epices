@@ -1,1 +1,34 @@
-<h1>Daily production</h1>
+<h1>Daily production <%= @daily_production.id %></h1>
+<div class="row">
+	<div class="col-12">
+	<%= link_to 'Return to list', productions_path, class: 'btn btn-primary' %>
+	</div>
+	<div class="col-4">
+		Date: <%= @daily_production.date %>
+	</div>
+	<div class="col-4">
+		Total energy: <%= @daily_production.energy_production %>
+	</div>
+	<div class="col-12">
+		<table class="table">
+			<thead>
+				<tr>
+				<th scope="col">#</th>
+				<th scope="col">Date</th>
+				<th scope="col">Energy</th>
+				<th scope="col">Inverter</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @daily_production.hourly_productions.each do |hourly_production| %>
+					<tr>
+					<th scope="row"><%= hourly_production.id %></th>
+					<td><%= hourly_production.datetime %></td>
+					<td><%= hourly_production.energy_production %></td>
+					<td><%= hourly_production.inverter_id %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
